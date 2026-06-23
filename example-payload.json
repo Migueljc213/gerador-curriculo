@@ -1,0 +1,41 @@
+{
+  "vaga": "Engenheiro_Backend_Senior_Nubank",
+
+  "resumo": "Desenvolvedor Full Stack Sênior com 6 anos de experiência em construção de sistemas distribuídos de alta performance utilizando Node.js, NestJS e TypeScript. Especialista em arquitetura de microserviços orientada a eventos, com sólida vivência em ambientes de alta escala e integração com plataformas financeiras e de marketing digital. Apaixonado por código limpo, DDD e entrega contínua com qualidade.",
+
+  "exp_frog_bullets": [
+    "Arquitetou e desenvolveu plataforma de ingestão de dados de mídia paga integrando Meta Ads, Google Ads, TikTok Ads e DV360, processando mais de 500 mil eventos por dia com NestJS e PostgreSQL.",
+    "Implementou pipeline de sincronização incremental com filas de workers assíncronos, reduzindo o tempo de atualização dos dashboards de 4 horas para menos de 15 minutos.",
+    "Projetou sistema de gerenciamento de status de ingestão com rastreabilidade por etapa, facilitando o diagnóstico de falhas em produção.",
+    "Liderou a padronização de módulos da API com Clean Architecture e documentação OpenAPI, aumentando a velocidade de onboarding de novos desenvolvedores."
+  ],
+
+  "exp_brasmid_bullets": [
+    "Desenvolveu APIs REST e GraphQL para plataforma SaaS de gestão de campanhas, com autenticação JWT e controle de acesso por perfis.",
+    "Migrou serviços monolíticos para microserviços em Docker, resultando em deploys independentes e redução de 40% no tempo de release.",
+    "Implementou estratégia de cache com Redis para endpoints de alta leitura, reduzindo latência média de 800ms para 120ms."
+  ],
+
+  "exp_aapvr_bullets": [
+    "Desenvolveu e manteve sistemas web com Node.js e MySQL, atendendo à base de clientes da empresa com alta disponibilidade.",
+    "Automatizou processos manuais de relatórios via scripts ETL, economizando 20 horas semanais da equipe operacional."
+  ],
+
+  "hab_back": "Node.js, NestJS, TypeScript, Python, Java, Spring Boot, REST APIs, GraphQL, RabbitMQ, Redis",
+  "hab_front": "React, Next.js, TypeScript, Tailwind CSS, Zustand",
+  "hab_db": "PostgreSQL, MySQL, MongoDB, Redis, Prisma ORM",
+  "hab_devops": "Docker, Docker Compose, AWS (EC2, RDS, S3), CI/CD, GitHub Actions",
+  "hab_arq": "Microserviços, Event-Driven Architecture, DDD, Clean Architecture, CQRS",
+  "hab_seg": "JWT, OAuth 2.0, HTTPS/TLS, Rate Limiting, OWASP Top 10",
+
+  "projetos_destaque": [
+    {
+      "titulo": "Plataforma de Ingestão de Dados de Mídia Paga — Frog Summit (2023)",
+      "descricao": "Sistema distribuído para coleta e normalização de dados de campanhas de múltiplas plataformas (Meta, Google, TikTok, DV360). Arquitetado com NestJS, filas de workers, PostgreSQL e deploy em Docker Compose na AWS. Processa +500 mil eventos/dia com monitoramento de status por etapa."
+    },
+    {
+      "titulo": "Dashboard Analítico de Marketing — Frog Summit (2022)",
+      "descricao": "Aplicação full stack com Next.js e NestJS para visualização de métricas de tráfego pago em tempo real. Integração com APIs de plataformas de ads via OAuth 2.0, gráficos interativos com dados agregados e exportação em CSV/PDF."
+    }
+  ]
+}

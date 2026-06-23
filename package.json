@@ -1,0 +1,20 @@
+{
+  "name": "gerador-curriculos",
+  "version": "1.0.0",
+  "description": "CLI para geração de currículos em PDF a partir de templates DOCX",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "generate": "ts-node src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "docxtemplater": "^3.49.0",
+    "pizzip": "^3.1.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
+  }
+}

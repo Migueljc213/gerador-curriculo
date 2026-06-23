@@ -1,0 +1,34 @@
+{
+"vaga": "Full_stack_Coodesh",
+"resumo": "Desenvolvedor Full-Stack com foco na criação de soluções escaláveis utilizando back-end em PHP (Laravel) e front-end moderno com React.js e Next.js. Possui forte espírito de equipe e atua de maneira colaborativa em ambientes dinâmicos, com experiência prática na construção de APIs RESTful e modelagem em PostgreSQL. Destaca-se pela aplicação de padrões de arquitetura de frontend, rotina de code reviews constantes e vivência com serviços cloud como AWS.",
+"exp_frog_bullets": [
+"Realizou sessões de Pair Programming e intenso code review, assegurando a qualidade técnica e fortalecendo o espírito de equipe de maneira colaborativa.",
+"Aplicou padrões de arquitetura de frontend e backend utilizando princípios SOLID e Domain-Driven Design (DDD) para manter o código testável e escalável.",
+"Desenvolveu novas funcionalidades e integrações críticas, demonstrando rápida adaptação e resolução proativa em desafios de um ambiente dinâmico."
+],
+"exp_brasmid_bullets": [
+"Desenvolveu o ciclo completo de plataformas Micro-SaaS e painéis administrativos utilizando back-end PHP com Laravel e front-end em Next.js e React.js.",
+"Criou APIs RESTful seguras e eficientes, conectando serviços a bases de dados estruturadas em PostgreSQL e otimizando consultas.",
+"Implementou fluxos de deploys automatizados, lidando com serviços cloud (AWS) sob prazos desafiadores em um ambiente dinâmico de startup."
+],
+"exp_aapvr_bullets": [
+"Liderou a definição da arquitetura técnica de um sistema ERP em Next.js, atuando de maneira colaborativa na mentoria e treinamento técnico de estagiários.",
+"Trabalhou na automação de processos através da criação de scripts de dados, provando capacidade de liderança em ambientes focados em desenvolvimento contínuo."
+],
+"hab_back": "PHP, Laravel, Node.js, Nest.js, APIs RESTful, TypeScript, Express.js",
+"hab_front": "React.js, Next.js, Padrões de arquitetura de frontend, Vue.js, Tailwind CSS, JavaScript",
+"hab_db": "PostgreSQL, MySQL, MongoDB, Redis",
+"hab_devops": "AWS, Docker, Kubernetes, CI/CD, GitHub Flow",
+"hab_arq": "Code review, SOLID, DDD, Clean Architecture, Design Patterns",
+"hab_seg": "Integração de LLMs, OWASP Top 10, JWT, OAuth 2.0, HTTPS/TLS",
+"projetos_destaque": [
+{
+"titulo": "SGE - Gestão Acadêmica — Projeto Full-Stack (2024)",
+"descricao": "Solução focada em regras de negócio complexas, desenvolvida com back-end estruturado e banco de dados PostgreSQL. Utilizou Next.js e padrões de arquitetura de frontend para criar uma interface de alta performance."
+},
+{
+"titulo": "Micro-SaaS Administrativo — Brasmid Startup (2024)",
+"descricao": "Desenvolvimento do design ao deploy de uma plataforma escalável integrando React.js e Laravel (PHP). O projeto consumiu APIs próprias operando em ambiente cloud com alta disponibilidade para os clientes."
+}
+]
+}
