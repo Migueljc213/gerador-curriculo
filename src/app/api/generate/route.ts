@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { renderToBuffer } from '@react-pdf/renderer';
 import { buildCurriculoDocument } from '@/lib/resumeTemplate';
-import type { CurriculoPayload } from '@/lib/types';
+import { DEFAULT_CONTEXT } from '@/lib/defaultContext';
+import type { CurriculoPayload, ProfissionalContext, TemplateId } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
   try {
-    const payload = (await request.json()) as CurriculoPayload;
+    const body = await request.json();
+    const payload = (body.payload ?? body) as CurriculoPayload;
+    const context: ProfissionalContext = body.context ?? DEFAULT_CONTEXT;
+    const template: TemplateId = body.template ?? 'moderno';
 
     if (!payload?.vaga || !payload?.resumo) {
       return NextResponse.json(
@@ -14,7 +18,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const pdfBuffer = await renderToBuffer(buildCurriculoDocument(payload));
+    const pdfBuffer = await renderToBuffer(buildCurriculoDocument(payload, context, template));
 
     const filename = `Curriculo_${payload.vaga.replace(/[^a-zA-Z0-9_-]/g, '_')}.pdf`;
 

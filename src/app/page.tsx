@@ -1,6 +1,9 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { DEFAULT_CONTEXT } from '@/lib/defaultContext';
+import { TEMPLATES } from '@/lib/resumeTemplate';
+import type { TemplateId } from '@/lib/types';
 
 const EXAMPLE_PAYLOAD = {
   vaga: 'Full_stack_Coodesh',
@@ -40,18 +43,67 @@ const EXAMPLE_PAYLOAD = {
   ],
 };
 
+const CONTEXT_STORAGE_KEY = 'curriculo_context';
+
+function loadStoredContext(): string {
+  if (typeof window === 'undefined') return JSON.stringify(DEFAULT_CONTEXT, null, 2);
+  return localStorage.getItem(CONTEXT_STORAGE_KEY) ?? JSON.stringify(DEFAULT_CONTEXT, null, 2);
+}
+
 export default function Home() {
+  const [contextText, setContextText] = useState('');
+  const [contextError, setContextError] = useState<string | null>(null);
+  const [contextOpen, setContextOpen] = useState(false);
+
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateId>('moderno');
+
   const [payloadText, setPayloadText] = useState(JSON.stringify(EXAMPLE_PAYLOAD, null, 2));
+  const [jsonError, setJsonError] = useState<string | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [downloadName, setDownloadName] = useState('curriculo.pdf');
   const [error, setError] = useState<string | null>(null);
-  const [jsonError, setJsonError] = useState<string | null>(null);
+
   const [showPrompt, setShowPrompt] = useState(false);
   const [promptContent, setPromptContent] = useState('');
   const [promptLoading, setPromptLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setContextText(loadStoredContext());
+  }, []);
+
+  const handleContextChange = (value: string) => {
+    setContextText(value);
+    setContextError(null);
+    try {
+      JSON.parse(value);
+      localStorage.setItem(CONTEXT_STORAGE_KEY, value);
+    } catch {
+      setContextError('JSON inválido');
+    }
+  };
+
+  const handleContextReset = () => {
+    const fresh = JSON.stringify(DEFAULT_CONTEXT, null, 2);
+    setContextText(fresh);
+    setContextError(null);
+    localStorage.setItem(CONTEXT_STORAGE_KEY, fresh);
+  };
+
+  const handleContextFormat = () => {
+    try {
+      const formatted = JSON.stringify(JSON.parse(contextText), null, 2);
+      setContextText(formatted);
+      setContextError(null);
+      localStorage.setItem(CONTEXT_STORAGE_KEY, formatted);
+    } catch {
+      setContextError('Não foi possível formatar: JSON inválido');
+    }
+  };
 
   const handlePayloadChange = (value: string) => {
     setPayloadText(value);
@@ -95,16 +147,26 @@ export default function Home() {
   const handleGenerate = async () => {
     setError(null);
     setDownloadUrl(null);
-    let parsed: unknown;
-    try { parsed = JSON.parse(payloadText); }
-    catch { setError('O JSON está inválido. Corrija antes de gerar.'); return; }
+
+    let parsedPayload: unknown;
+    let parsedContext: unknown;
+
+    try { parsedPayload = JSON.parse(payloadText); }
+    catch { setError('O JSON da vaga está inválido. Corrija antes de gerar.'); return; }
+
+    try { parsedContext = JSON.parse(contextText); }
+    catch { setError('O JSON do contexto profissional está inválido. Corrija antes de gerar.'); return; }
 
     setLoading(true);
     try {
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(parsed),
+        body: JSON.stringify({
+          payload: parsedPayload,
+          context: parsedContext,
+          template: selectedTemplate,
+        }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -112,13 +174,20 @@ export default function Home() {
       }
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
-      const p = parsed as { vaga?: string };
+      const p = parsedPayload as { vaga?: string };
       setDownloadUrl(url);
       setDownloadName(`Curriculo_${p?.vaga ?? 'gerado'}.pdf`);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erro ao gerar PDF.');
     } finally { setLoading(false); }
   };
+
+  const contextSummary = (() => {
+    try {
+      const ctx = JSON.parse(contextText) as { nome?: string; titulo?: string };
+      return `${ctx.nome ?? '—'} · ${ctx.titulo ?? '—'}`;
+    } catch { return 'Contexto inválido'; }
+  })();
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -131,13 +200,140 @@ export default function Home() {
           </div>
           <div>
             <h1 className="text-lg font-semibold text-slate-900 leading-tight">Gerador de Currículo PDF</h1>
-            <p className="text-xs text-slate-500">José Miguel Cardozo · Powered by React PDF</p>
+            <p className="text-xs text-slate-500">Powered by React PDF</p>
           </div>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-10 space-y-6">
-        {/* Step 1 */}
+
+        {/* ── Contexto Profissional ─────────────────────────────────────── */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <button
+            onClick={() => setContextOpen((o) => !o)}
+            className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-7 h-7 rounded-full bg-violet-100 text-violet-700 flex items-center justify-center">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-sm font-semibold text-slate-800">Contexto Profissional</h2>
+                <p className="text-xs text-slate-500 mt-0.5">{contextSummary}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              {contextError && (
+                <span className="text-xs text-red-500 bg-red-50 px-2 py-0.5 rounded">JSON inválido</span>
+              )}
+              <svg
+                className={`w-4 h-4 text-slate-400 transition-transform ${contextOpen ? 'rotate-180' : ''}`}
+                fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </div>
+          </button>
+
+          {contextOpen && (
+            <div className="px-6 pb-5 border-t border-slate-100">
+              <p className="text-xs text-slate-500 mt-4 mb-3 leading-relaxed">
+                Edite seus dados pessoais, empresas e formação. Salvo automaticamente no navegador.
+                As <strong>empresas[0,1,2]</strong> mapeiam para os campos <code className="bg-slate-100 px-1 rounded">exp_frog_bullets</code>, <code className="bg-slate-100 px-1 rounded">exp_brasmid_bullets</code> e <code className="bg-slate-100 px-1 rounded">exp_aapvr_bullets</code> do payload.
+              </p>
+              <div className="relative">
+                <textarea
+                  value={contextText}
+                  onChange={(e) => handleContextChange(e.target.value)}
+                  spellCheck={false}
+                  rows={22}
+                  className={`w-full font-mono text-xs bg-slate-950 text-slate-100 rounded-lg px-4 py-3 resize-none outline-none focus:ring-2 transition-all ${contextError ? 'ring-2 ring-red-500' : 'focus:ring-violet-500'}`}
+                />
+                {contextError && (
+                  <div className="absolute bottom-3 right-3 text-xs text-red-400 bg-slate-900 px-2 py-1 rounded">{contextError}</div>
+                )}
+              </div>
+              <div className="flex items-center gap-2 mt-3">
+                <button onClick={handleContextFormat}
+                  className="text-xs px-3 py-1.5 rounded-md border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">
+                  Formatar JSON
+                </button>
+                <button onClick={handleContextReset}
+                  className="text-xs px-3 py-1.5 rounded-md border border-red-200 text-red-600 hover:bg-red-50 transition-colors">
+                  Restaurar padrão
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ── Seletor de Template ───────────────────────────────────────── */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="px-6 py-5">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
+                </svg>
+              </div>
+              <h2 className="text-sm font-semibold text-slate-800">Template de Layout</h2>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {(Object.entries(TEMPLATES) as [TemplateId, { label: string; description: string }][]).map(([id, tpl]) => (
+                <button
+                  key={id}
+                  onClick={() => setSelectedTemplate(id)}
+                  className={`relative text-left p-4 rounded-lg border-2 transition-all ${
+                    selectedTemplate === id
+                      ? 'border-indigo-500 bg-indigo-50'
+                      : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                  }`}
+                >
+                  {id === 'moderno' && selectedTemplate === 'moderno' && (
+                    <span className="absolute top-2 right-2 text-[10px] bg-indigo-600 text-white px-1.5 py-0.5 rounded font-medium">PADRÃO</span>
+                  )}
+                  {id === 'moderno' && selectedTemplate !== 'moderno' && (
+                    <span className="absolute top-2 right-2 text-[10px] bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-medium">PADRÃO</span>
+                  )}
+
+                  {/* Mini preview */}
+                  <div className="mb-3 w-full h-16 rounded overflow-hidden border border-slate-200">
+                    {id === 'moderno' ? (
+                      <div className="w-full h-full flex flex-col">
+                        <div className="bg-slate-900 h-6 w-full" />
+                        <div className="bg-white flex-1 p-1 space-y-0.5">
+                          <div className="h-1 bg-blue-200 rounded w-3/4" />
+                          <div className="h-0.5 bg-slate-100 rounded w-full" />
+                          <div className="h-1 bg-slate-200 rounded w-full" />
+                          <div className="h-1 bg-slate-200 rounded w-5/6" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full bg-white p-1.5 flex flex-col gap-0.5">
+                        <div className="h-2 bg-slate-800 rounded w-1/2" />
+                        <div className="h-0.5 bg-slate-300 rounded w-full" />
+                        <div className="h-1 bg-slate-200 rounded w-full" />
+                        <div className="h-1 bg-slate-200 rounded w-4/5" />
+                        <div className="h-0.5 bg-slate-300 rounded w-full mt-0.5" />
+                        <div className="h-1 bg-slate-200 rounded w-full" />
+                      </div>
+                    )}
+                  </div>
+
+                  <p className={`text-sm font-semibold mb-0.5 ${selectedTemplate === id ? 'text-indigo-700' : 'text-slate-800'}`}>
+                    {tpl.label}
+                  </p>
+                  <p className="text-xs text-slate-500 leading-relaxed">{tpl.description}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Step 1: Gere o JSON com IA ───────────────────────────────── */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="px-6 py-5">
             <div className="flex items-center gap-3 mb-3">
@@ -157,7 +353,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Step 2 */}
+        {/* ── Step 2: Cole o JSON ──────────────────────────────────────── */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="px-6 py-5">
             <div className="flex items-center justify-between mb-3">
@@ -188,14 +384,24 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Step 3 */}
+        {/* ── Step 3: Gere o PDF ───────────────────────────────────────── */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="px-6 py-5">
             <div className="flex items-center gap-3 mb-5">
               <span className="w-7 h-7 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold flex items-center justify-center">3</span>
               <h2 className="text-base font-semibold text-slate-800">Gere o PDF</h2>
             </div>
-            <button onClick={handleGenerate} disabled={loading || !!jsonError}
+
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-200 mb-5 text-xs text-slate-600">
+              <svg className="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+              </svg>
+              <span>
+                Usando template <strong>{TEMPLATES[selectedTemplate].label}</strong> com o contexto de <strong>{contextSummary.split(' · ')[0]}</strong>
+              </span>
+            </div>
+
+            <button onClick={handleGenerate} disabled={loading || !!jsonError || !!contextError}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-indigo-600 text-white font-medium text-sm hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
               {loading ? (
                 <><svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z" /></svg>Gerando PDF...</>
@@ -203,8 +409,6 @@ export default function Home() {
                 <><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>Gerar PDF</>
               )}
             </button>
-
-            {loading && <p className="mt-3 text-xs text-slate-500">Gerando PDF...</p>}
 
             {error && (
               <div className="mt-4 p-4 rounded-lg bg-red-50 border border-red-200 flex gap-3">
