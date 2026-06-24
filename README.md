@@ -1,1 +1,1 @@
-npm run generate -- --template ./Curriculo-Jose.docx --payload ./payload.json
+# gerador-curriculo
