@@ -6,7 +6,7 @@ export const DEFAULT_CONTEXT: ProfissionalContext = {
   email: 'migueljccardozo@gmail.com',
   telefone: '+55 (24) 99973-6248',
   github: 'github.com/Migueljc123',
-  linkedin: 'linkedin.com/in/miguel-cardozo',
+  linkedin: 'www.linkedin.com/in/jose-miguelfjc',
   localizacao: 'Rio de Janeiro, RJ',
   empresas: [
     {

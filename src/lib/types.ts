@@ -43,4 +43,4 @@ export interface ProfissionalContext {
   educacao: Educacao[];
 }
 
-export type TemplateId = 'moderno' | 'minimalista';
+export type TemplateId = 'classico' | 'minimalista';

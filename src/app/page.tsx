@@ -55,7 +55,7 @@ export default function Home() {
   const [contextError, setContextError] = useState<string | null>(null);
   const [contextOpen, setContextOpen] = useState(false);
 
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateId>('moderno');
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateId>('classico');
 
   const [payloadText, setPayloadText] = useState(JSON.stringify(EXAMPLE_PAYLOAD, null, 2));
   const [jsonError, setJsonError] = useState<string | null>(null);
@@ -292,24 +292,27 @@ export default function Home() {
                       : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                   }`}
                 >
-                  {id === 'moderno' && selectedTemplate === 'moderno' && (
+                  {id === 'classico' && selectedTemplate === 'classico' && (
                     <span className="absolute top-2 right-2 text-[10px] bg-indigo-600 text-white px-1.5 py-0.5 rounded font-medium">PADRÃO</span>
                   )}
-                  {id === 'moderno' && selectedTemplate !== 'moderno' && (
+                  {id === 'classico' && selectedTemplate !== 'classico' && (
                     <span className="absolute top-2 right-2 text-[10px] bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-medium">PADRÃO</span>
                   )}
 
                   {/* Mini preview */}
                   <div className="mb-3 w-full h-16 rounded overflow-hidden border border-slate-200">
-                    {id === 'moderno' ? (
-                      <div className="w-full h-full flex flex-col">
-                        <div className="bg-slate-900 h-6 w-full" />
-                        <div className="bg-white flex-1 p-1 space-y-0.5">
-                          <div className="h-1 bg-blue-200 rounded w-3/4" />
-                          <div className="h-0.5 bg-slate-100 rounded w-full" />
-                          <div className="h-1 bg-slate-200 rounded w-full" />
-                          <div className="h-1 bg-slate-200 rounded w-5/6" />
+                    {id === 'classico' ? (
+                      <div className="w-full h-full bg-white p-1.5 flex flex-col gap-0.5">
+                        <div className="flex justify-between items-start">
+                          <div className="h-2.5 bg-slate-800 rounded w-2/5" />
+                          <div className="flex flex-col gap-0.5 items-end">
+                            <div className="h-1 bg-slate-300 rounded w-10" />
+                            <div className="h-1 bg-slate-300 rounded w-8" />
+                          </div>
                         </div>
+                        <div className="h-px bg-slate-400 rounded w-full mt-0.5" />
+                        <div className="h-1 bg-slate-200 rounded w-full" />
+                        <div className="h-1 bg-slate-200 rounded w-4/5" />
                       </div>
                     ) : (
                       <div className="w-full h-full bg-white p-1.5 flex flex-col gap-0.5">

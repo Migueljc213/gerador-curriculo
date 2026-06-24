@@ -2,82 +2,124 @@ import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import type { CurriculoPayload, ProfissionalContext, TemplateId } from './types';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// TEMPLATE: MODERNO (padrão)
+// TEMPLATE: CLÁSSICO (baseado no novo layout .docx)
+// Header 2 colunas · Títulos com borda cinza superior · Tipografia preta pura
 // ─────────────────────────────────────────────────────────────────────────────
 
-const mColors = {
-  dark: '#0f172a', blue: '#2563eb', body: '#1e293b',
-  muted: '#64748b', white: '#ffffff', divider: '#e2e8f0',
-  headerSub: '#94a3b8', headerContact: '#cbd5e1',
+const cColors = {
+  name:    '#262626',
+  section: '#262626',
+  body:    '#111111',
+  muted:   '#595959',
+  rule:    '#A6A6A6',
+  white:   '#ffffff',
 };
 
-const mStyles = StyleSheet.create({
-  page: { fontFamily: 'Helvetica', backgroundColor: mColors.white, fontSize: 9, color: mColors.body },
-  header: { backgroundColor: mColors.dark, paddingHorizontal: 40, paddingTop: 30, paddingBottom: 22 },
-  headerName: { fontFamily: 'Helvetica-Bold', fontSize: 22, color: mColors.white, letterSpacing: 1, marginBottom: 3 },
-  headerTitle: { fontSize: 10, color: mColors.headerSub, marginBottom: 12 },
-  headerContactRow: { flexDirection: 'row', flexWrap: 'wrap' },
-  headerContactItem: { fontSize: 8, color: mColors.headerContact, marginRight: 18, marginBottom: 2 },
-  content: { paddingHorizontal: 40, paddingTop: 22, paddingBottom: 36 },
-  section: { marginBottom: 14 },
-  sectionTitleRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 2 },
-  sectionAccent: { width: 3, height: 11, backgroundColor: mColors.blue, borderRadius: 2, marginRight: 7 },
-  sectionTitle: { fontFamily: 'Helvetica-Bold', fontSize: 8.5, color: mColors.dark, letterSpacing: 1.8, textTransform: 'uppercase' },
-  sectionDivider: { height: 0.75, backgroundColor: mColors.divider, marginBottom: 9 },
-  summaryText: { fontSize: 9, lineHeight: 1.65, color: mColors.body, textAlign: 'justify' },
-  expBlock: { marginBottom: 10 },
-  expTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 1 },
-  expCompany: { fontFamily: 'Helvetica-Bold', fontSize: 9.5, color: mColors.dark },
-  expDate: { fontSize: 8, color: mColors.muted, marginTop: 1 },
-  expRole: { fontFamily: 'Helvetica-Oblique', fontSize: 8.5, color: mColors.blue, marginBottom: 5 },
-  expSeparator: { height: 0.5, backgroundColor: mColors.divider, marginVertical: 8 },
-  bulletRow: { flexDirection: 'row', marginBottom: 3, paddingRight: 4 },
-  bulletDot: { fontFamily: 'Helvetica-Bold', fontSize: 8, color: mColors.blue, marginRight: 5, marginTop: 1.5 },
-  bulletText: { fontSize: 8.5, lineHeight: 1.55, color: mColors.body, flex: 1 },
+const cStyles = StyleSheet.create({
+  page: {
+    fontFamily: 'Helvetica',
+    backgroundColor: cColors.white,
+    fontSize: 10,
+    color: cColors.body,
+    paddingHorizontal: 72,
+    paddingTop: 45,
+    paddingBottom: 54,
+  },
+
+  // Header
+  header: { flexDirection: 'row', marginBottom: 14 },
+  headerLeft: { flex: 6 },
+  headerRight: { flex: 4, alignItems: 'flex-end', paddingTop: 4 },
+  headerName: {
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 28,
+    color: cColors.name,
+    letterSpacing: 0.3,
+    marginBottom: 3,
+  },
+  headerTitle: { fontSize: 10, color: cColors.muted },
+  headerContact: { fontSize: 8.5, color: cColors.muted, marginBottom: 1.5, textAlign: 'right' },
+
+  // Section
+  section: { marginBottom: 12 },
+  sectionHeader: {
+    borderTopWidth: 0.75,
+    borderTopColor: cColors.rule,
+    paddingTop: 5,
+    marginBottom: 7,
+  },
+  sectionTitle: {
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 13,
+    color: cColors.section,
+    letterSpacing: 0.2,
+  },
+
+  // Experience
+  expBlock: { marginBottom: 9 },
+  expDate: { fontSize: 8.5, color: cColors.muted, marginBottom: 1 },
+  expRole: {
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 10,
+    color: cColors.body,
+    marginBottom: 4,
+  },
+  bulletRow: { flexDirection: 'row', marginBottom: 2.5, paddingRight: 4 },
+  bulletDot: { fontSize: 9, color: cColors.body, marginRight: 5, marginTop: 0.5 },
+  bulletText: { fontSize: 9, lineHeight: 1.55, color: cColors.body, flex: 1 },
+  expSep: { height: 0.5, backgroundColor: '#e0e0e0', marginVertical: 7 },
+
+  // Skills
+  skillRow: { flexDirection: 'row', marginBottom: 3 },
+  skillLabel: {
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 9,
+    color: cColors.body,
+    width: 120,
+  },
+  skillValue: { fontSize: 9, lineHeight: 1.5, color: cColors.body, flex: 1 },
+
+  // Education
+  eduBlock: { marginBottom: 8 },
+  eduTitle: { fontFamily: 'Helvetica-Bold', fontSize: 10, color: cColors.body, marginBottom: 1 },
+  eduInstitution: { fontSize: 9, color: cColors.muted, marginBottom: 1 },
+  eduPeriod: { fontSize: 8.5, color: cColors.muted },
+
+  // Projects
   projectBlock: { marginBottom: 8 },
-  projectTitle: { fontFamily: 'Helvetica-Bold', fontSize: 9, color: mColors.dark, marginBottom: 2 },
-  projectDesc: { fontSize: 8.5, lineHeight: 1.55, color: mColors.body, textAlign: 'justify' },
-  skillRow: { flexDirection: 'row', marginBottom: 4 },
-  skillLabel: { fontFamily: 'Helvetica-Bold', fontSize: 8, color: mColors.dark, width: 88, paddingTop: 1 },
-  skillValue: { fontSize: 8, lineHeight: 1.55, color: mColors.body, flex: 1 },
-  eduBlock: { marginBottom: 7 },
-  eduTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  eduTitle: { fontFamily: 'Helvetica-Bold', fontSize: 9, color: mColors.dark },
-  eduDate: { fontSize: 8, color: mColors.muted, marginTop: 1 },
-  eduInstitution: { fontFamily: 'Helvetica-Oblique', fontSize: 8.5, color: mColors.blue, marginTop: 1 },
+  projectTitle: { fontFamily: 'Helvetica-Bold', fontSize: 10, color: cColors.body, marginBottom: 2 },
+  projectDesc: { fontSize: 9, lineHeight: 1.55, color: cColors.body, textAlign: 'justify' },
+
+  // Summary
+  summaryText: { fontSize: 10, lineHeight: 1.65, color: cColors.body, textAlign: 'justify' },
 });
 
-function MSection({ title, children }: { title: string; children: React.ReactNode }) {
+function CSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <View style={mStyles.section}>
-      <View style={mStyles.sectionTitleRow}>
-        <View style={mStyles.sectionAccent} />
-        <Text style={mStyles.sectionTitle}>{title}</Text>
+    <View style={cStyles.section}>
+      <View style={cStyles.sectionHeader}>
+        <Text style={cStyles.sectionTitle}>{title}</Text>
       </View>
-      <View style={mStyles.sectionDivider} />
       {children}
     </View>
   );
 }
 
-function MExpBlock({ empresa, bullets, separator = false }: {
+function CExpBlock({ empresa, bullets, separator = false }: {
   empresa: { nome: string; cargo: string; periodo: string };
   bullets: string[];
   separator?: boolean;
 }) {
   return (
     <View wrap={false}>
-      {separator && <View style={mStyles.expSeparator} />}
-      <View style={mStyles.expBlock}>
-        <View style={mStyles.expTopRow}>
-          <Text style={mStyles.expCompany}>{empresa.nome}</Text>
-          <Text style={mStyles.expDate}>{empresa.periodo}</Text>
-        </View>
-        <Text style={mStyles.expRole}>{empresa.cargo}</Text>
+      {separator && <View style={cStyles.expSep} />}
+      <View style={cStyles.expBlock}>
+        <Text style={cStyles.expDate}>{empresa.periodo}</Text>
+        <Text style={cStyles.expRole}>{empresa.cargo} | {empresa.nome}</Text>
         {bullets.map((b, i) => (
-          <View key={i} style={mStyles.bulletRow}>
-            <Text style={mStyles.bulletDot}>▸</Text>
-            <Text style={mStyles.bulletText}>{b}</Text>
+          <View key={i} style={cStyles.bulletRow}>
+            <Text style={cStyles.bulletDot}>•</Text>
+            <Text style={cStyles.bulletText}>{b}</Text>
           </View>
         ))}
       </View>
@@ -85,63 +127,67 @@ function MExpBlock({ empresa, bullets, separator = false }: {
   );
 }
 
-function buildModerno(payload: CurriculoPayload, ctx: ProfissionalContext) {
+function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
   return (
     <Document>
-      <Page size="A4" style={mStyles.page}>
-        <View style={mStyles.header} fixed>
-          <Text style={mStyles.headerName}>{ctx.nome}</Text>
-          <Text style={mStyles.headerTitle}>{ctx.titulo}</Text>
-          <View style={mStyles.headerContactRow}>
-            <Text style={mStyles.headerContactItem}>{ctx.email}</Text>
-            <Text style={mStyles.headerContactItem}>{ctx.telefone}</Text>
-            <Text style={mStyles.headerContactItem}>{ctx.github}</Text>
-            <Text style={mStyles.headerContactItem}>{ctx.linkedin}</Text>
-            <Text style={mStyles.headerContactItem}>{ctx.localizacao}</Text>
+      <Page size="A4" style={cStyles.page}>
+        {/* Header duas colunas */}
+        <View style={cStyles.header}>
+          <View style={cStyles.headerLeft}>
+            <Text style={cStyles.headerName}>{ctx.nome}</Text>
+            <Text style={cStyles.headerTitle}>{ctx.titulo}</Text>
+          </View>
+          <View style={cStyles.headerRight}>
+            <Text style={cStyles.headerContact}>{ctx.localizacao}</Text>
+            <Text style={cStyles.headerContact}>{ctx.telefone}</Text>
+            <Text style={cStyles.headerContact}>{ctx.email}</Text>
+            <Text style={cStyles.headerContact}>{ctx.linkedin}</Text>
+            <Text style={cStyles.headerContact}>{ctx.github}</Text>
           </View>
         </View>
 
-        <View style={mStyles.content}>
-          <MSection title="Resumo Profissional">
-            <Text style={mStyles.summaryText}>{payload.resumo}</Text>
-          </MSection>
+        {/* Resumo */}
+        <CSection title="Resumo Profissional">
+          <Text style={cStyles.summaryText}>{payload.resumo}</Text>
+        </CSection>
 
-          <MSection title="Experiência Profissional">
-            <MExpBlock empresa={ctx.empresas[0]} bullets={payload.exp_frog_bullets} />
-            <MExpBlock empresa={ctx.empresas[1]} bullets={payload.exp_brasmid_bullets} separator />
-            <MExpBlock empresa={ctx.empresas[2]} bullets={payload.exp_aapvr_bullets} separator />
-          </MSection>
+        {/* Experiência */}
+        <CSection title="Experiência">
+          <CExpBlock empresa={ctx.empresas[0]} bullets={payload.exp_frog_bullets} />
+          <CExpBlock empresa={ctx.empresas[1]} bullets={payload.exp_brasmid_bullets} separator />
+          <CExpBlock empresa={ctx.empresas[2]} bullets={payload.exp_aapvr_bullets} separator />
+        </CSection>
 
-          <MSection title="Projetos de Destaque">
-            {payload.projetos_destaque.map((p, i) => (
-              <View key={i} style={mStyles.projectBlock} wrap={false}>
-                <Text style={mStyles.projectTitle}>{p.titulo}</Text>
-                <Text style={mStyles.projectDesc}>{p.descricao}</Text>
-              </View>
-            ))}
-          </MSection>
+        {/* Habilidades */}
+        <CSection title="Habilidades">
+          <View style={cStyles.skillRow}><Text style={cStyles.skillLabel}>Back-End:</Text><Text style={cStyles.skillValue}>{payload.hab_back}</Text></View>
+          <View style={cStyles.skillRow}><Text style={cStyles.skillLabel}>Front-End:</Text><Text style={cStyles.skillValue}>{payload.hab_front}</Text></View>
+          <View style={cStyles.skillRow}><Text style={cStyles.skillLabel}>Bancos de Dados:</Text><Text style={cStyles.skillValue}>{payload.hab_db}</Text></View>
+          <View style={cStyles.skillRow}><Text style={cStyles.skillLabel}>Infraestrutura e DevOps:</Text><Text style={cStyles.skillValue}>{payload.hab_devops}</Text></View>
+          <View style={cStyles.skillRow}><Text style={cStyles.skillLabel}>Arquitetura e IA:</Text><Text style={cStyles.skillValue}>{payload.hab_arq}</Text></View>
+          <View style={cStyles.skillRow}><Text style={cStyles.skillLabel}>Segurança:</Text><Text style={cStyles.skillValue}>{payload.hab_seg}</Text></View>
+        </CSection>
 
-          <MSection title="Habilidades Técnicas">
-            <View style={mStyles.skillRow}><Text style={mStyles.skillLabel}>Back-End:</Text><Text style={mStyles.skillValue}>{payload.hab_back}</Text></View>
-            <View style={mStyles.skillRow}><Text style={mStyles.skillLabel}>Front-End:</Text><Text style={mStyles.skillValue}>{payload.hab_front}</Text></View>
-            <View style={mStyles.skillRow}><Text style={mStyles.skillLabel}>Banco de Dados:</Text><Text style={mStyles.skillValue}>{payload.hab_db}</Text></View>
-            <View style={mStyles.skillRow}><Text style={mStyles.skillLabel}>DevOps:</Text><Text style={mStyles.skillValue}>{payload.hab_devops}</Text></View>
-            <View style={mStyles.skillRow}><Text style={mStyles.skillLabel}>Arquitetura:</Text><Text style={mStyles.skillValue}>{payload.hab_arq}</Text></View>
-            <View style={mStyles.skillRow}><Text style={mStyles.skillLabel}>Segurança:</Text><Text style={mStyles.skillValue}>{payload.hab_seg}</Text></View>
-          </MSection>
+        {/* Formação */}
+        <CSection title="Formação Acadêmica">
+          {ctx.educacao.map((edu, i) => (
+            <View key={i} style={cStyles.eduBlock}>
+              <Text style={cStyles.eduTitle}>{edu.titulo}</Text>
+              <Text style={cStyles.eduInstitution}>{edu.instituicao}</Text>
+              <Text style={cStyles.eduPeriod}>{edu.periodo}</Text>
+            </View>
+          ))}
+        </CSection>
 
-          <MSection title="Formação Acadêmica">
-            {ctx.educacao.map((edu, i) => (
-              <View key={i} style={mStyles.eduBlock}>
-                <View style={mStyles.eduTopRow}>
-                  <Text style={mStyles.eduTitle}>{edu.titulo}</Text>
-                  <Text style={mStyles.eduDate}>{edu.periodo}</Text>
-                </View>
-                <Text style={mStyles.eduInstitution}>{edu.instituicao}</Text>
-              </View>
-            ))}
-          </MSection>
-        </View>
+        {/* Projetos */}
+        <CSection title="Projetos e Desenvolvimento Contínuo">
+          {payload.projetos_destaque.map((p, i) => (
+            <View key={i} style={cStyles.projectBlock} wrap={false}>
+              <Text style={cStyles.projectTitle}>{p.titulo}</Text>
+              <Text style={cStyles.projectDesc}>{p.descricao}</Text>
+            </View>
+          ))}
+        </CSection>
       </Page>
     </Document>
   );
@@ -290,17 +336,17 @@ function buildMinimalista(payload: CurriculoPayload, ctx: ProfissionalContext) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const TEMPLATES: Record<TemplateId, { label: string; description: string }> = {
-  moderno:      { label: 'Moderno',      description: 'Header escuro, acentos azuis. Visual profissional e marcante.' },
+  classico:     { label: 'Clássico',     description: 'Nome em destaque, contatos à direita, seções com linha cinza. ATS-friendly.' },
   minimalista:  { label: 'Minimalista',  description: 'Clean, sem cores, tipografia pura. Elegante e atemporal.' },
 };
 
 export function buildCurriculoDocument(
   payload: CurriculoPayload,
   context: ProfissionalContext,
-  template: TemplateId = 'moderno'
+  template: TemplateId = 'classico'
 ) {
   switch (template) {
     case 'minimalista': return buildMinimalista(payload, context);
-    default:            return buildModerno(payload, context);
+    default:            return buildClassico(payload, context);
   }
 }

@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const payload = (body.payload ?? body) as CurriculoPayload;
     const context: ProfissionalContext = body.context ?? DEFAULT_CONTEXT;
-    const template: TemplateId = body.template ?? 'moderno';
+    const template: TemplateId = body.template ?? 'classico';
 
     if (!payload?.vaga || !payload?.resumo) {
       return NextResponse.json(
