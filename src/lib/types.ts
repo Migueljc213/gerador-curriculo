@@ -30,6 +30,13 @@ export interface Educacao {
   periodo: string;
 }
 
+export interface Curso {
+  titulo: string;
+  plataforma: string;
+  periodo: string;
+  topicos?: string;
+}
+
 export interface ProfissionalContext {
   nome: string;
   titulo: string;
@@ -41,6 +48,7 @@ export interface ProfissionalContext {
   /** Exatamente 3 entradas — mapeadas para exp_frog, exp_brasmid, exp_aapvr */
   empresas: [Empresa, Empresa, Empresa];
   educacao: Educacao[];
+  cursos?: Curso[];
 }
 
 export type TemplateId = 'classico' | 'minimalista';

@@ -20,6 +20,12 @@ Analise a descrição da vaga fornecida no final deste prompt e retorne **EXCLUS
 - Bacharelado em Sistemas para Internet | FAETERJ (Previsão: Julho 2026).
 - Formação Full-Stack Developer | Escola DNC (Maio 2024 - Março 2025).
 
+**Cursos & Certificações Complementares:**
+- DevOps — Git, Linux, Docker e Kubernetes | Alura (Jun/2026 – Presente) — cobre Git, Linux, Windows Server, conceitos de DevOps, Docker e Kubernetes.
+- Fundamentos de LLMs | DIO (Jun/2026 – Presente) — Large Language Models, Transformers, Prompt Engineering, Fine-tuning, RAG.
+- Intensivão de Docker (2h) | Full Cycle 3 (Abr/2026) — containers, Docker Compose e boas práticas.
+- Java 10x — Curso Completo de Java (40h) | Java 10x (Fev/2026) — Java, OOP, Collections, Streams, Spring Boot, JUnit.
+
 **Soft Skills & Perfil:** Forte comunicação, vivência prática em ambiente acelerado de startup, pair programming, code reviews, liderança técnica, mentoria de estagiários e perfil orientado à aplicação de boas práticas (SOLID, DDD, Clean Architecture). Familiaridade com metodologias ágeis Scrum e Kanban: gestão de sprints, boards, backlogs, planning e retrospectivas.
 
 **Experiências Profissionais (em ordem cronológica reversa):**
