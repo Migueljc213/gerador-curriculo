@@ -152,6 +152,9 @@ function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
             <Text style={cStyles.headerContact}>{ctx.email}</Text>
             <Text style={cStyles.headerContact}>{ctx.linkedin}</Text>
             <Text style={cStyles.headerContact}>{ctx.github}</Text>
+            {ctx.portfolio && (
+              <Text style={cStyles.headerContact}>{ctx.portfolio}</Text>
+            )}
           </View>
         </View>
 

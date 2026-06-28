@@ -44,6 +44,7 @@ export interface ProfissionalContext {
   telefone: string;
   github: string;
   linkedin: string;
+  portfolio?: string;
   localizacao: string;
   /** Exatamente 3 entradas — mapeadas para exp_frog, exp_brasmid, exp_aapvr */
   empresas: [Empresa, Empresa, Empresa];
