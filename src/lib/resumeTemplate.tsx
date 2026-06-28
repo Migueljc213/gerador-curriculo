@@ -90,6 +90,15 @@ const cStyles = StyleSheet.create({
   projectTitle: { fontFamily: 'Helvetica-Bold', fontSize: 10, color: cColors.body, marginBottom: 2 },
   projectDesc: { fontSize: 9, lineHeight: 1.55, color: cColors.body, textAlign: 'justify' },
 
+  // Courses
+  cursoBlock: { marginBottom: 7 },
+  cursoTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 1 },
+  cursoTitulo: { fontFamily: 'Helvetica-Bold', fontSize: 9.5, color: cColors.body, flex: 1, paddingRight: 8 },
+  cursoPeriodo: { fontSize: 8, color: cColors.muted, textAlign: 'right' },
+  cursoPlataforma: { fontSize: 8.5, color: cColors.muted, marginBottom: 1 },
+  cursoTopicos: { fontSize: 8.5, color: cColors.body },
+  cursoSep: { height: 0.5, backgroundColor: '#e0e0e0', marginVertical: 5 },
+
   // Summary
   summaryText: { fontSize: 10, lineHeight: 1.65, color: cColors.body, textAlign: 'justify' },
 });
@@ -178,6 +187,25 @@ function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
             </View>
           ))}
         </CSection>
+
+        {/* Cursos e Certificações — renderiza apenas se houver dados */}
+        {ctx.cursos && ctx.cursos.length > 0 && (
+          <CSection title="Cursos e Certificações">
+            {ctx.cursos.map((c, i) => (
+              <View key={i} wrap={false}>
+                {i > 0 && <View style={cStyles.cursoSep} />}
+                <View style={cStyles.cursoBlock}>
+                  <View style={cStyles.cursoTopRow}>
+                    <Text style={cStyles.cursoTitulo}>{c.titulo}</Text>
+                    <Text style={cStyles.cursoPeriodo}>{c.periodo}</Text>
+                  </View>
+                  <Text style={cStyles.cursoPlataforma}>{c.plataforma}</Text>
+                  {c.topicos && <Text style={cStyles.cursoTopicos}>{c.topicos}</Text>}
+                </View>
+              </View>
+            ))}
+          </CSection>
+        )}
 
         {/* Projetos */}
         <CSection title="Projetos e Desenvolvimento Contínuo">
