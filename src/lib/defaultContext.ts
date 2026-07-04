@@ -5,7 +5,7 @@ export const DEFAULT_CONTEXT: ProfissionalContext = {
   titulo: 'Desenvolvedor Full-Stack Júnior',
   email: 'migueljccardozo@gmail.com',
   telefone: '+55 (24) 99973-6248',
-  github: 'github.com/Migueljc213',
+  github: 'https://github.com/Migueljc213',
   linkedin: 'www.linkedin.com/in/jose-miguelfjc',
   portfolio: 'https://portifolio-jose-miguel.vercel.app/',
   localizacao: 'Rio de Janeiro, RJ',
