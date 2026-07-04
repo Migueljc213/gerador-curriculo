@@ -7,7 +7,7 @@ export const DEFAULT_CONTEXT: ProfissionalContext = {
   telefone: '+55 (24) 99973-6248',
   github: 'github.com/Migueljc213',
   linkedin: 'www.linkedin.com/in/jose-miguelfjc',
-  portfolio: 'portifolio-jose-miguel.vercel.app',
+  portfolio: 'https://portifolio-jose-miguel.vercel.app/',
   localizacao: 'Rio de Janeiro, RJ',
   empresas: [
     {

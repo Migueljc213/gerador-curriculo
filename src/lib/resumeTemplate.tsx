@@ -1,4 +1,4 @@
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Link } from '@react-pdf/renderer';
 import type { CurriculoPayload, ProfissionalContext, TemplateId } from './types';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -153,7 +153,7 @@ function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
             <Text style={cStyles.headerContact}>{ctx.linkedin}</Text>
             <Text style={cStyles.headerContact}>{ctx.github}</Text>
             {ctx.portfolio && (
-              <Text style={cStyles.headerContact}>{ctx.portfolio}</Text>
+              <Link src={ctx.portfolio} style={cStyles.headerContact}>{ctx.portfolio}</Link>
             )}
           </View>
         </View>
