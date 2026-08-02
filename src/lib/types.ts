@@ -10,7 +10,18 @@ export interface CurriculoPayload {
   hab_devops: string;
   hab_arq: string;
   hab_seg: string;
+  /** 0 a N entradas — a IA decide quantas incluir de acordo com a relevância para a vaga. */
   projetos_destaque: ProjetoDestaque[];
+  /** 0 a N entradas — a IA seleciona apenas os cursos/certificações relevantes para a vaga (pode ser omitido). */
+  cursos?: Curso[];
+  /** Sobrescreve o título abaixo do nome no cabeçalho (ex.: remover "Júnior" para vagas Pleno/Sênior). Se omitido, usa ctx.titulo. */
+  titulo?: string;
+  /** Sobrescreve o cargo exibido na experiência Frog Summit. Se omitido, usa ctx.empresas[0].cargo. */
+  cargo_frog?: string;
+  /** Sobrescreve o cargo exibido na experiência Brasmid Startup. Se omitido, usa ctx.empresas[1].cargo. */
+  cargo_brasmid?: string;
+  /** Sobrescreve o cargo exibido na experiência Projeto AAP-VR. Se omitido, usa ctx.empresas[2].cargo. */
+  cargo_aapvr?: string;
 }
 
 export interface ProjetoDestaque {
@@ -49,7 +60,6 @@ export interface ProfissionalContext {
   /** Exatamente 3 entradas — mapeadas para exp_frog, exp_brasmid, exp_aapvr */
   empresas: [Empresa, Empresa, Empresa];
   educacao: Educacao[];
-  cursos?: Curso[];
 }
 
 export type TemplateId = 'classico' | 'minimalista';

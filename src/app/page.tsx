@@ -41,6 +41,7 @@ const EXAMPLE_PAYLOAD = {
         'Desenvolvimento do design ao deploy de uma plataforma escalável integrando React.js e Laravel (PHP). O projeto consumiu APIs próprias operando em ambiente cloud com alta disponibilidade para os clientes.',
     },
   ],
+  cursos: [],
 };
 
 const CONTEXT_STORAGE_KEY = 'curriculo_context';

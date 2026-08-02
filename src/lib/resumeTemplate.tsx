@@ -19,88 +19,88 @@ const cStyles = StyleSheet.create({
   page: {
     fontFamily: 'Helvetica',
     backgroundColor: cColors.white,
-    fontSize: 10,
+    fontSize: 9.3,
     color: cColors.body,
-    paddingHorizontal: 72,
-    paddingTop: 45,
-    paddingBottom: 54,
+    paddingHorizontal: 40,
+    paddingTop: 22,
+    paddingBottom: 22,
   },
 
   // Header
-  header: { flexDirection: 'row', marginBottom: 14 },
+  header: { flexDirection: 'row', marginBottom: 6 },
   headerLeft: { flex: 6 },
-  headerRight: { flex: 4, alignItems: 'flex-end', paddingTop: 4 },
+  headerRight: { flex: 4, alignItems: 'flex-end', paddingTop: 2 },
   headerName: {
     fontFamily: 'Helvetica-Bold',
-    fontSize: 28,
+    fontSize: 18,
     color: cColors.name,
     letterSpacing: 0.3,
-    marginBottom: 3,
+    marginBottom: 2,
   },
-  headerTitle: { fontSize: 10, color: cColors.muted },
-  headerContact: { fontSize: 8.5, color: cColors.muted, marginBottom: 1.5, textAlign: 'right' },
+  headerTitle: { fontSize: 8.6, color: cColors.muted },
+  headerContact: { fontSize: 7.5, color: cColors.muted, marginBottom: 0.8, textAlign: 'right' },
 
   // Section
-  section: { marginBottom: 12 },
+  section: { marginBottom: 4 },
   sectionHeader: {
     borderTopWidth: 0.75,
     borderTopColor: cColors.rule,
-    paddingTop: 5,
-    marginBottom: 7,
+    paddingTop: 2,
+    marginBottom: 2.5,
   },
   sectionTitle: {
     fontFamily: 'Helvetica-Bold',
-    fontSize: 13,
+    fontSize: 10,
     color: cColors.section,
     letterSpacing: 0.2,
   },
 
   // Experience
-  expBlock: { marginBottom: 9 },
-  expDate: { fontSize: 8.5, color: cColors.muted, marginBottom: 1 },
+  expBlock: { marginBottom: 3.5 },
+  expDate: { fontSize: 7.4, color: cColors.muted, marginBottom: 0.5 },
   expRole: {
     fontFamily: 'Helvetica-Bold',
-    fontSize: 10,
+    fontSize: 8.8,
     color: cColors.body,
-    marginBottom: 4,
+    marginBottom: 1.5,
   },
-  bulletRow: { flexDirection: 'row', marginBottom: 2.5, paddingRight: 4 },
-  bulletDot: { fontSize: 9, color: cColors.body, marginRight: 5, marginTop: 0.5 },
-  bulletText: { fontSize: 9, lineHeight: 1.55, color: cColors.body, flex: 1 },
-  expSep: { height: 0.5, backgroundColor: '#e0e0e0', marginVertical: 7 },
+  bulletRow: { flexDirection: 'row', marginBottom: 0.8, paddingRight: 4 },
+  bulletDot: { fontSize: 7.8, color: cColors.body, marginRight: 5, marginTop: 0.5 },
+  bulletText: { fontSize: 8.1, lineHeight: 1.2, color: cColors.body, flex: 1 },
+  expSep: { height: 0.5, backgroundColor: '#e0e0e0', marginVertical: 3 },
 
   // Skills
-  skillRow: { flexDirection: 'row', marginBottom: 3 },
+  skillRow: { flexDirection: 'row', marginBottom: 1 },
   skillLabel: {
     fontFamily: 'Helvetica-Bold',
-    fontSize: 9,
+    fontSize: 8.1,
     color: cColors.body,
-    width: 120,
+    width: 105,
   },
-  skillValue: { fontSize: 9, lineHeight: 1.5, color: cColors.body, flex: 1 },
+  skillValue: { fontSize: 8.1, lineHeight: 1.2, color: cColors.body, flex: 1 },
 
   // Education
-  eduBlock: { marginBottom: 8 },
-  eduTitle: { fontFamily: 'Helvetica-Bold', fontSize: 10, color: cColors.body, marginBottom: 1 },
-  eduInstitution: { fontSize: 9, color: cColors.muted, marginBottom: 1 },
-  eduPeriod: { fontSize: 8.5, color: cColors.muted },
+  eduBlock: { marginBottom: 3 },
+  eduTitle: { fontFamily: 'Helvetica-Bold', fontSize: 8.8, color: cColors.body, marginBottom: 0.5 },
+  eduInstitution: { fontSize: 8.1, color: cColors.muted, marginBottom: 0.3 },
+  eduPeriod: { fontSize: 7.4, color: cColors.muted },
 
   // Projects
-  projectBlock: { marginBottom: 8 },
-  projectTitle: { fontFamily: 'Helvetica-Bold', fontSize: 10, color: cColors.body, marginBottom: 2 },
-  projectDesc: { fontSize: 9, lineHeight: 1.55, color: cColors.body, textAlign: 'justify' },
+  projectBlock: { marginBottom: 3 },
+  projectTitle: { fontFamily: 'Helvetica-Bold', fontSize: 8.8, color: cColors.body, marginBottom: 1 },
+  projectDesc: { fontSize: 8.1, lineHeight: 1.2, color: cColors.body, textAlign: 'justify' },
 
   // Courses
-  cursoBlock: { marginBottom: 7 },
-  cursoTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 1 },
-  cursoTitulo: { fontFamily: 'Helvetica-Bold', fontSize: 9.5, color: cColors.body, flex: 1, paddingRight: 8 },
-  cursoPeriodo: { fontSize: 8, color: cColors.muted, textAlign: 'right' },
-  cursoPlataforma: { fontSize: 8.5, color: cColors.muted, marginBottom: 1 },
-  cursoTopicos: { fontSize: 8.5, color: cColors.body },
-  cursoSep: { height: 0.5, backgroundColor: '#e0e0e0', marginVertical: 5 },
+  cursoBlock: { marginBottom: 2.5 },
+  cursoTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 0.5 },
+  cursoTitulo: { fontFamily: 'Helvetica-Bold', fontSize: 8.3, color: cColors.body, flex: 1, paddingRight: 8 },
+  cursoPeriodo: { fontSize: 7.1, color: cColors.muted, textAlign: 'right' },
+  cursoPlataforma: { fontSize: 7.6, color: cColors.muted, marginBottom: 0.5 },
+  cursoTopicos: { fontSize: 7.6, color: cColors.body },
+  cursoSep: { height: 0.5, backgroundColor: '#e0e0e0', marginVertical: 2 },
 
   // Summary
-  summaryText: { fontSize: 10, lineHeight: 1.65, color: cColors.body, textAlign: 'justify' },
+  summaryText: { fontSize: 9, lineHeight: 1.25, color: cColors.body, textAlign: 'justify' },
 });
 
 function CSection({ title, children }: { title: string; children: React.ReactNode }) {
@@ -137,6 +137,11 @@ function CExpBlock({ empresa, bullets, separator = false }: {
 }
 
 function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
+  const titulo = payload.titulo ?? ctx.titulo;
+  const empresaFrog = { ...ctx.empresas[0], cargo: payload.cargo_frog ?? ctx.empresas[0].cargo };
+  const empresaBrasmid = { ...ctx.empresas[1], cargo: payload.cargo_brasmid ?? ctx.empresas[1].cargo };
+  const empresaAapvr = { ...ctx.empresas[2], cargo: payload.cargo_aapvr ?? ctx.empresas[2].cargo };
+
   return (
     <Document>
       <Page size="A4" style={cStyles.page}>
@@ -144,7 +149,7 @@ function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
         <View style={cStyles.header}>
           <View style={cStyles.headerLeft}>
             <Text style={cStyles.headerName}>{ctx.nome}</Text>
-            <Text style={cStyles.headerTitle}>{ctx.titulo}</Text>
+            <Text style={cStyles.headerTitle}>{titulo}</Text>
           </View>
           <View style={cStyles.headerRight}>
             <Text style={cStyles.headerContact}>{ctx.localizacao}</Text>
@@ -165,9 +170,9 @@ function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
 
         {/* Experiência */}
         <CSection title="Experiência">
-          <CExpBlock empresa={ctx.empresas[0]} bullets={payload.exp_frog_bullets} />
-          <CExpBlock empresa={ctx.empresas[1]} bullets={payload.exp_brasmid_bullets} separator />
-          <CExpBlock empresa={ctx.empresas[2]} bullets={payload.exp_aapvr_bullets} separator />
+          <CExpBlock empresa={empresaFrog} bullets={payload.exp_frog_bullets} />
+          <CExpBlock empresa={empresaBrasmid} bullets={payload.exp_brasmid_bullets} separator />
+          <CExpBlock empresa={empresaAapvr} bullets={payload.exp_aapvr_bullets} separator />
         </CSection>
 
         {/* Habilidades */}
@@ -191,10 +196,10 @@ function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
           ))}
         </CSection>
 
-        {/* Cursos e Certificações — renderiza apenas se houver dados */}
-        {ctx.cursos && ctx.cursos.length > 0 && (
+        {/* Cursos e Certificações — a IA decide se inclui, com base na relevância para a vaga */}
+        {payload.cursos && payload.cursos.length > 0 && (
           <CSection title="Cursos e Certificações">
-            {ctx.cursos.map((c, i) => (
+            {payload.cursos.map((c, i) => (
               <View key={i} wrap={false}>
                 {i > 0 && <View style={cStyles.cursoSep} />}
                 <View style={cStyles.cursoBlock}>
@@ -202,23 +207,27 @@ function buildClassico(payload: CurriculoPayload, ctx: ProfissionalContext) {
                     <Text style={cStyles.cursoTitulo}>{c.titulo}</Text>
                     <Text style={cStyles.cursoPeriodo}>{c.periodo}</Text>
                   </View>
-                  <Text style={cStyles.cursoPlataforma}>{c.plataforma}</Text>
-                  {c.topicos && <Text style={cStyles.cursoTopicos}>{c.topicos}</Text>}
+                  <Text style={cStyles.cursoPlataforma}>
+                    {c.plataforma}
+                    {c.topicos ? `  —  ${c.topicos}` : ''}
+                  </Text>
                 </View>
               </View>
             ))}
           </CSection>
         )}
 
-        {/* Projetos */}
-        <CSection title="Projetos e Desenvolvimento Contínuo">
-          {payload.projetos_destaque.map((p, i) => (
-            <View key={i} style={cStyles.projectBlock} wrap={false}>
-              <Text style={cStyles.projectTitle}>{p.titulo}</Text>
-              <Text style={cStyles.projectDesc}>{p.descricao}</Text>
-            </View>
-          ))}
-        </CSection>
+        {/* Projetos — quantidade decidida pela IA conforme relevância para a vaga */}
+        {payload.projetos_destaque && payload.projetos_destaque.length > 0 && (
+          <CSection title="Projetos e Desenvolvimento Contínuo">
+            {payload.projetos_destaque.map((p, i) => (
+              <View key={i} style={cStyles.projectBlock} wrap={false}>
+                <Text style={cStyles.projectTitle}>{p.titulo}</Text>
+                <Text style={cStyles.projectDesc}>{p.descricao}</Text>
+              </View>
+            ))}
+          </CSection>
+        )}
       </Page>
     </Document>
   );
@@ -263,6 +272,11 @@ const minStyles = StyleSheet.create({
   eduTitle: { fontFamily: 'Helvetica-Bold', fontSize: 9, color: minColors.black },
   eduDate: { fontSize: 8, color: minColors.light },
   eduInstitution: { fontSize: 8.5, color: minColors.muted, marginTop: 1 },
+  cursoBlock: { marginBottom: 7 },
+  cursoTopRow: { flexDirection: 'row', justifyContent: 'space-between' },
+  cursoTitulo: { fontFamily: 'Helvetica-Bold', fontSize: 9, color: minColors.black, flex: 1, paddingRight: 8 },
+  cursoPeriodo: { fontSize: 8, color: minColors.light },
+  cursoPlataforma: { fontSize: 8.5, color: minColors.muted, marginTop: 1 },
 });
 
 function MinSection({ title, children }: { title: string; children: React.ReactNode }) {
@@ -300,11 +314,16 @@ function MinExpBlock({ empresa, bullets, separator = false }: {
 }
 
 function buildMinimalista(payload: CurriculoPayload, ctx: ProfissionalContext) {
+  const titulo = payload.titulo ?? ctx.titulo;
+  const empresaFrog = { ...ctx.empresas[0], cargo: payload.cargo_frog ?? ctx.empresas[0].cargo };
+  const empresaBrasmid = { ...ctx.empresas[1], cargo: payload.cargo_brasmid ?? ctx.empresas[1].cargo };
+  const empresaAapvr = { ...ctx.empresas[2], cargo: payload.cargo_aapvr ?? ctx.empresas[2].cargo };
+
   return (
     <Document>
       <Page size="A4" style={minStyles.page}>
         <Text style={minStyles.headerName}>{ctx.nome}</Text>
-        <Text style={minStyles.headerTitle}>{ctx.titulo}</Text>
+        <Text style={minStyles.headerTitle}>{titulo}</Text>
         <View style={minStyles.headerContactRow}>
           <Text style={minStyles.headerContactItem}>{ctx.email}</Text>
           <Text style={minStyles.headerContactItem}>{ctx.telefone}</Text>
@@ -320,21 +339,25 @@ function buildMinimalista(payload: CurriculoPayload, ctx: ProfissionalContext) {
         <View style={minStyles.rule} />
 
         <MinSection title="Experiência Profissional">
-          <MinExpBlock empresa={ctx.empresas[0]} bullets={payload.exp_frog_bullets} />
-          <MinExpBlock empresa={ctx.empresas[1]} bullets={payload.exp_brasmid_bullets} separator />
-          <MinExpBlock empresa={ctx.empresas[2]} bullets={payload.exp_aapvr_bullets} separator />
+          <MinExpBlock empresa={empresaFrog} bullets={payload.exp_frog_bullets} />
+          <MinExpBlock empresa={empresaBrasmid} bullets={payload.exp_brasmid_bullets} separator />
+          <MinExpBlock empresa={empresaAapvr} bullets={payload.exp_aapvr_bullets} separator />
         </MinSection>
         <View style={minStyles.rule} />
 
-        <MinSection title="Projetos de Destaque">
-          {payload.projetos_destaque.map((p, i) => (
-            <View key={i} style={minStyles.projectBlock} wrap={false}>
-              <Text style={minStyles.projectTitle}>{p.titulo}</Text>
-              <Text style={minStyles.projectDesc}>{p.descricao}</Text>
-            </View>
-          ))}
-        </MinSection>
-        <View style={minStyles.rule} />
+        {payload.projetos_destaque && payload.projetos_destaque.length > 0 && (
+          <>
+            <MinSection title="Projetos de Destaque">
+              {payload.projetos_destaque.map((p, i) => (
+                <View key={i} style={minStyles.projectBlock} wrap={false}>
+                  <Text style={minStyles.projectTitle}>{p.titulo}</Text>
+                  <Text style={minStyles.projectDesc}>{p.descricao}</Text>
+                </View>
+              ))}
+            </MinSection>
+            <View style={minStyles.rule} />
+          </>
+        )}
 
         <MinSection title="Habilidades Técnicas">
           <View style={minStyles.skillRow}><Text style={minStyles.skillLabel}>Back-End</Text><Text style={minStyles.skillValue}>{payload.hab_back}</Text></View>
@@ -357,6 +380,27 @@ function buildMinimalista(payload: CurriculoPayload, ctx: ProfissionalContext) {
             </View>
           ))}
         </MinSection>
+
+        {/* Cursos e Certificações — a IA decide se inclui, com base na relevância para a vaga */}
+        {payload.cursos && payload.cursos.length > 0 && (
+          <>
+            <View style={minStyles.rule} />
+            <MinSection title="Cursos e Certificações">
+              {payload.cursos.map((c, i) => (
+                <View key={i} style={minStyles.cursoBlock}>
+                  <View style={minStyles.cursoTopRow}>
+                    <Text style={minStyles.cursoTitulo}>{c.titulo}</Text>
+                    <Text style={minStyles.cursoPeriodo}>{c.periodo}</Text>
+                  </View>
+                  <Text style={minStyles.cursoPlataforma}>
+                    {c.plataforma}
+                    {c.topicos ? `  —  ${c.topicos}` : ''}
+                  </Text>
+                </View>
+              ))}
+            </MinSection>
+          </>
+        )}
       </Page>
     </Document>
   );
