@@ -10,6 +10,8 @@ export interface CurriculoPayload {
   hab_devops: string;
   hab_arq: string;
   hab_seg: string;
+  /** Soft skills e metodologias reais do candidato (comunicação, liderança, mentoria, Scrum/Kanban etc.), com ênfase nas pedidas pela vaga. */
+  hab_soft: string;
   /** 0 a N entradas — a IA decide quantas incluir de acordo com a relevância para a vaga. */
   projetos_destaque: ProjetoDestaque[];
   /** 0 a N entradas — a IA seleciona apenas os cursos/certificações relevantes para a vaga (pode ser omitido). */
@@ -62,4 +64,4 @@ export interface ProfissionalContext {
   educacao: Educacao[];
 }
 
-export type TemplateId = 'classico' | 'minimalista';
+export type TemplateId = 'classico' | 'moderno';

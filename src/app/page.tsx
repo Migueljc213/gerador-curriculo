@@ -29,6 +29,7 @@ const EXAMPLE_PAYLOAD = {
   hab_devops: 'AWS, Docker, Kubernetes, CI/CD, GitHub Flow',
   hab_arq: 'Code review, SOLID, DDD, Clean Architecture, Design Patterns',
   hab_seg: 'Integração de LLMs, OWASP Top 10, JWT, OAuth 2.0, HTTPS/TLS',
+  hab_soft: 'Comunicação, Pair Programming, Code Review, Liderança Técnica, Mentoria, Scrum, Kanban',
   projetos_destaque: [
     {
       titulo: 'SGE - Gestão Acadêmica — Projeto Full-Stack (2024)',

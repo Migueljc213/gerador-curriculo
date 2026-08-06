@@ -18,7 +18,7 @@ Analise a descrição da vaga fornecida no final deste prompt e retorne **EXCLUS
 
 O candidato quer que o currículo mostre o alcance completo do que ele sabe. **Nunca omita uma tecnologia real do "Contexto do Profissional" só porque a vaga não usou aquela palavra exata.** Exemplo: mesmo que a vaga não mencione "TypeScript", se TypeScript está na Stack Completa Mapeada do candidato, ele deve aparecer em `hab_*` e, sempre que fizer sentido, em bullets/projetos reais onde foi usado.
 
-- Em `hab_back`, `hab_front`, `hab_db`, `hab_devops`, `hab_arq` e `hab_seg`, liste **toda** a stack real do candidato que se encaixe em cada categoria (com base na "Stack Completa Mapeada" abaixo) — não é permitido remover uma tecnologia real só porque a vaga não a citou.
+- Em `hab_back`, `hab_front`, `hab_db`, `hab_devops`, `hab_arq`, `hab_seg` e `hab_soft`, liste **toda** a stack real do candidato que se encaixe em cada categoria (com base na "Stack Completa Mapeada" e no "Soft Skills & Perfil" abaixo) — não é permitido remover uma tecnologia/soft skill real só porque a vaga não a citou.
 - Use a vaga para decidir **ordem e ênfase**: coloque primeiro, e desenvolva mais em bullets/projetos, as tecnologias que a vaga pede explicitamente. As demais tecnologias reais entram depois, com menos destaque, mas continuam presentes.
 - Isso vale também para `projetos_destaque`: escolha projetos reais que demonstrem o maior número possível de ferramentas do candidato, priorizando as que a vaga pede, mas sem esconder as demais.
 - A única exceção é `cursos`, que segue regra própria (ver Princípio 4) — cursos são complementares e podem ser omitidos, diferente das tecnologias da stack.
@@ -64,8 +64,8 @@ Nenhuma das 3 experiências profissionais reais usa Java — o único projeto re
 
 O rótulo "Júnior" no título e nos cargos é o primeiro filtro de descarte em triagens para vagas que pedem um "engenheiro completo", "autonomia", "senso de dono" ou "decisões técnicas de arquitetura" — mesmo quando o conteúdo do currículo já demonstra o nível técnico exigido. Analise os sinais de senioridade da vaga antes de decidir:
 
-- **Vaga sinaliza Pleno/Sênior** (palavras como "pleno", "sênior", "autonomia", "senso de dono", "decisões de arquitetura", "engenheiro(a) completo(a)", sem mencionar "júnior"/"estágio"/"trainee"): preencha `titulo` como `"Desenvolvedor Full-Stack"` (sem "Júnior") e `cargo_frog`/`cargo_brasmid` como `"Desenvolvedor Full-Stack"` (sem "Júnior"). Isso não infla a experiência real — os bullets continuam contando fielmente os ~2 anos de atuação; você só remove um rótulo que causa descarte automático antes do recrutador ler o resto.
-- **Vaga pede explicitamente júnior/estágio/trainee/primeira experiência**: mantenha os títulos originais — omita `titulo`, `cargo_frog` e `cargo_brasmid` do JSON (ou repita os valores originais "Desenvolvedor Full-Stack Júnior" / "Desenvolvedor Júnior Full-Stack"), pois aqui o rótulo júnior é uma vantagem, não um risco.
+- **Vaga sinaliza Pleno/Sênior** (palavras como "pleno", "sênior", "autonomia", "senso de dono", "decisões de arquitetura", "engenheiro(a) completo(a)", sem mencionar "júnior"/"estágio"/"trainee"): preencha `titulo` como `"Desenvolvedor Full-Stack"` (sem "Júnior") e `cargo_frog`/`cargo_brasmid` como `"Desenvolvedor Full-Stack (PJ)"` (sem "Júnior", mas **mantendo** o sufixo "(PJ)" — ver nota sobre sobreposição de datas). Isso não infla a experiência real — os bullets continuam contando fielmente os ~2 anos de atuação; você só remove um rótulo que causa descarte automático antes do recrutador ler o resto.
+- **Vaga pede explicitamente júnior/estágio/trainee/primeira experiência**: mantenha os títulos originais — omita `titulo`, `cargo_frog` e `cargo_brasmid` do JSON (ou repita os valores originais "Desenvolvedor Full-Stack Júnior" / "Desenvolvedor Júnior Full-Stack (PJ)"), pois aqui o rótulo júnior é uma vantagem, não um risco.
 - `cargo_aapvr` normalmente não precisa de ajuste (já é "Liderança Técnica e Mentoria", sem rótulo júnior) — só sobrescreva se fizer sentido pela regra 7.
 
 ### 7. Contextualize o Projeto AAP-VR para não parecer uma regressão de carreira
@@ -74,6 +74,14 @@ Na ordem cronológica, o Projeto AAP-VR (liderança técnica e mentoria, 01/2024
 
 - Nos bullets de `exp_aapvr_bullets`, deixe implícito o escopo pontual/menor (ex.: "projeto", "iniciativa") sem soar como um cargo formal indistinguível de uma empresa consolidada — isso evita a leitura de regressão sem precisar mentir sobre datas ou função.
 - Nunca altere datas, nunca omita a experiência — apenas escolha palavras que deixem o contexto (pontual, escopo reduzido) implícito.
+
+### 8. Revisão ortográfica e gramatical obrigatória — zero erros
+
+Um erro de digitação na primeira linha da experiência mais recente é motivo de descarte sumário por um recrutador humano, mesmo que o ATS não penalize por isso. Antes de gerar a resposta final:
+
+- Releia **cada string** do JSON (resumo, todos os bullets, descrições de projeto, tópicos de curso) procurando especificamente: erros de digitação/letra faltando ou trocada, acentuação incorreta, crase incorreta, concordância verbal e nominal, e **conjugação verbal incorreta** — verbos de ação no passado são a base de cada bullet, então sua conjugação tem que estar impecável (ex.: "garantir" → "Garantiu", nunca "Garantil"; "manter" → "Manteve", nunca "Manteu"; "propor" → "Propôs"; "conter" → "Conteve").
+- Se tiver qualquer dúvida sobre a grafia ou conjugação correta de uma palavra em português, prefira uma palavra/verbo mais simples do qual você tenha certeza, em vez de arriscar um termo rebuscado incorreto.
+- Português do Brasil, formal, sem coloquialismos, sem erros de português — esse é um requisito inegociável, não uma preferência de estilo.
 
 ## Contexto do Profissional (Otimizado para Alta Empregabilidade)
 
@@ -93,8 +101,10 @@ Na ordem cronológica, o Projeto AAP-VR (liderança técnica e mentoria, 01/2024
 
 **Experiências Profissionais (em ordem cronológica reversa — as 3 são reais e sempre presentes; nunca invente ou remova):**
 
+> Nota sobre sobreposição de datas: Frog Summit (Mar/2025–Presente) e Brasmid Startup (Mai/2024–Dez/2025) se sobrepõem por ~9 meses. Isso é real e não é erro — José Miguel atua como **PJ (Pessoa Jurídica)** em ambos, entregando por demanda, não em regime CLT de dedicação exclusiva. Por isso os cargos trazem o sufixo "(PJ)": isso sinaliza a um recrutador/ATS que a sobreposição é esperada em contrato de prestação de serviço, não uma inconsistência de preenchimento. Nunca remova o "(PJ)" do cargo ao usar `cargo_frog`/`cargo_brasmid`; se for preciso ajustar o rótulo por senioridade (Princípio 6), mantenha o sufixo (ex.: "Desenvolvedor Full-Stack (PJ)").
+
 1. **Frog Summit** (03/2025 – Atualmente)
-   - Cargo: Desenvolvedor Júnior Full-Stack.
+   - Cargo: Desenvolvedor Júnior Full-Stack (PJ).
    - Atuação no desenvolvimento de aplicações complexas para novas funcionalidades e integrações críticas.
    - Colaboração em sessões de Pair Programming e Code Reviews, assegurando a qualidade técnica.
    - Aplicação rigorosa de princípios SOLID e Domain-Driven Design (DDD) na arquitetura.
@@ -105,7 +115,7 @@ Na ordem cronológica, o Projeto AAP-VR (liderança técnica e mentoria, 01/2024
    - Stack: Vue.js, Nest.js, Node.js, Docker, Kubernetes.
 
 2. **Brasmid Startup** (05/2024 – 12/2025)
-   - Cargo: Desenvolvedor Júnior Full Stack.
+   - Cargo: Desenvolvedor Júnior Full Stack (PJ).
    - Responsável pelo ciclo completo de desenvolvimento (do design ao deploy) de sites, painéis administrativos e landing pages.
    - Criação e manutenção de projetos de Micro-SaaS com foco em produtos escaláveis e experiência do cliente.
    - Consumo e criação de APIs RESTful seguindo princípios REST (stateless, recursos, verbos HTTP, status codes).
@@ -166,6 +176,7 @@ Retorne **exatamente** este schema, preenchido com os textos gerados:
   "hab_devops": "string — TODAS as ferramentas DevOps reais do candidato, separadas por vírgula, com as pedidas pela vaga primeiro",
   "hab_arq": "string — TODOS os padrões arquiteturais reais do candidato, separados por vírgula, com os pedidos pela vaga primeiro",
   "hab_seg": "string — TODAS as tecnologias e práticas de segurança reais do candidato, separadas por vírgula, com as pedidas pela vaga primeiro",
+  "hab_soft": "string — TODAS as soft skills e metodologias reais do candidato (baseado em 'Soft Skills & Perfil' do contexto: comunicação, pair programming, code review, liderança técnica, mentoria, Scrum/Kanban etc.), separadas por vírgula, com as pedidas pela vaga primeiro",
   "projetos_destaque": [
     {
       "titulo": "string — Nome do projeto — Empresa/contexto (ano). Será exibido em negrito no PDF.",
@@ -191,14 +202,15 @@ Retorne **exatamente** este schema, preenchido com os textos gerados:
 ## Regras de Qualidade (siga rigorosamente)
 
 1. **Não invente experiências, projetos ou cursos.** Use apenas os dados reais do contexto do José Miguel.
-2. **Nunca omita tecnologia real.** Toda tecnologia da "Stack Completa Mapeada" deve aparecer em `hab_*`; a vaga só decide a ordem/ênfase, nunca a exclusão (ver Princípio 1).
+2. **Nunca omita tecnologia ou soft skill real.** Toda tecnologia da "Stack Completa Mapeada" deve aparecer em `hab_*`, e toda soft skill/metodologia real de "Soft Skills & Perfil" deve aparecer em `hab_soft`; a vaga só decide a ordem/ênfase, nunca a exclusão (ver Princípio 1).
 3. **Palavras-chave sim, cópia não.** Use os termos técnicos exatos que o recrutador usou (tecnologias, ferramentas), mas nunca copie frases/expressões inteiras do anúncio — escreva com as próprias palavras do candidato, amarradas a uma ação e um resultado real (ver regra anti-copy-paste no Princípio 2).
 4. **Cobertura de ferramentas-chave.** Toda tecnologia central da vaga deve aparecer em uso em pelo menos um bullet ou projeto, e o restante da stack real deve ser distribuído pelos demais bullets/projetos (ver Princípio 3).
 5. **Julgue projetos vs. cursos.** Decida por vaga o que fortalece mais o currículo; não inclua tudo por padrão (ver Princípio 4).
 6. **Projeto Java obrigatório.** Toda vaga que pedir Java deve incluir o projeto TaskFlow em `projetos_destaque` (ver Princípio 5).
 7. **Julgue o rótulo "Júnior".** Remova "Júnior" de `titulo`/`cargo_frog`/`cargo_brasmid` quando a vaga sinalizar Pleno/Sênior; mantenha quando a vaga pedir júnior/estágio (ver Princípio 6).
 8. **Não deixe o AAP-VR parecer uma regressão.** Contextualize como projeto pontual, não como cargo formal equivalente aos outros (ver Princípio 7).
-9. **Campo `vaga`** deve ser o nome da empresa ou do cargo, sem espaços, sem acentos.
-10. **JSON 100% puro.** Nenhum caractere fora do objeto JSON.
+9. **Zero erros de português.** Releia toda string antes de responder: ortografia, acentuação, crase, concordância e conjugação verbal corretas em cada bullet (ver Princípio 8). Um erro na primeira linha da experiência mais recente é motivo de descarte imediato por um recrutador humano.
+10. **Campo `vaga`** deve ser o nome da empresa ou do cargo, sem espaços, sem acentos.
+11. **JSON 100% puro.** Nenhum caractere fora do objeto JSON.
 
 ## Descrição da Vaga

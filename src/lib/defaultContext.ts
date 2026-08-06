@@ -12,12 +12,12 @@ export const DEFAULT_CONTEXT: ProfissionalContext = {
   empresas: [
     {
       nome: 'Frog Summit',
-      cargo: 'Desenvolvedor Júnior Full-Stack',
+      cargo: 'Desenvolvedor Júnior Full-Stack (PJ)',
       periodo: 'Mar/2025 – Presente',
     },
     {
       nome: 'Brasmid Startup',
-      cargo: 'Desenvolvedor Júnior Full-Stack',
+      cargo: 'Desenvolvedor Júnior Full-Stack (PJ)',
       periodo: 'Mai/2024 – Dez/2025',
     },
     {
